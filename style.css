@@ -1,11 +1,21 @@
-body{
-    background-color: #e6e2e2;
+* {
+    box-sizing: border-box;
 }
+body{
+    font-family: Impact;
+    color: white;
+    background-color: #e6e2e2;
+    text-shadow: -1.5px 1.5px #4c4140;
+}
+
+
+/* Header */
 header{
     background-color: #b5abaa;
     text-align: center;
     padding: 5%;
     border-radius: 30px;
+    margin: 12px 0px;
 }
 h1{
     color: white;
@@ -22,28 +32,39 @@ h1::after {
   content: "_Kitty!";
 }
 #join-link{
+    position: absolute;
+    display: flex;
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
     color: white;
     background-color: black;
     font-family: "Impact";
+    text-decoration: none;
 }
 
-#main_content{
-    width: 100%;
-    height: 30vh; /*vh - viewport height*/
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /*fr - fractional unit (1 part of the available space)*/
-    gap: 16px;
-    margin: 24px 0px;
+
+/* Gallery_ad */
+#gallery_ad{
+    display: flex;
+    align-items: flex-start;
+    margin: 12px 0px;
+    height: 95vh;
+    container-type: size;
 }
 #gallery{
+    position: relative;
+    flex: 8;
     display: grid;
-    width: 70%;
-    height: 90vh;
+    height: 95vh;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, 1fr);
-    margin: 24px 0px;
     gap: 4px;
-    float: left;
 }
 #gallery > div {
     min-height: 0;
@@ -57,8 +78,8 @@ h1::after {
     border: 4px solid #b5abaa;
 }
 .gallery-img:hover{
-    transform: scale(2);
-    border-radius: 20px;
+    transform: scale(2.015);
+    border-radius: 0px;
     transition: transform 0.3s ease-in-out,
                 border-radius 0.3s ease-in-out;
 }
@@ -75,13 +96,33 @@ h1::after {
     transform-origin: right bottom;
 }
 #ad{
+    flex: 2;
+    height: 100%;
     background-color: #b5abaa;
-    text-align: center;
-    padding: 5%;
-    margin: 24px 0px 24px 24px;
+    writing-mode: vertical-rl;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-radius: 30px;
-    float: left;
-    width: 15vw;
+    box-shadow : clamp(0.8rem, 5cqh, 3.5rem) clamp(0.8rem, 5cqh, 3.5rem) clamp(0.8rem, 5cqh, 3.5rem) #4c4140ad inset;
+    overflow: hidden;
+}
+#ad > p{
+    font-size: clamp(0.8rem, 5cqh, 3.5rem);
+    text-align: center;
+    padding: 35px
+}
+
+
+
+/* Content */
+#main_content{
+    width: 100%;
+    height: 30vh; /*vh - viewport height*/
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /*fr - fractional unit (1 part of the available space)*/
+    gap: 16px;
+    margin: 12px 0px;
 }
 .column{
     border: 4px solid #b5abaa;
@@ -89,14 +130,37 @@ h1::after {
     padding: 5px 7px;
     overflow-y: scroll;
     text-align: justify;
+    font-family: Cambria;
+    color:#4c4140;
+    text-shadow: 1px 1px 0px white
 }
 .column p {
     margin: 0;
 }
 
+
+
+/* Footer */
 footer{
     background-color: #b5abaa;
     text-align: center;
     padding: 5%;
     border-radius: 30px;
+}
+#info{
+    display: flex;
+    list-style-type: none;
+    justify-content: center;
+    
+}
+.info_element{
+    margin-right: 15px;
+}
+.info_element:hover{
+    color: #4c4140;
+    text-shadow: -1.5px 1.5px white;
+    cursor: pointer;
+}
+#made_by{
+    font-size: clamp(0.8rem, 5cqh, 3.5rem)
 }
