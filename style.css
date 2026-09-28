@@ -40,21 +40,26 @@ h1::after {
     right: 10px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
+    text-align: left;
+    padding-left: 10px;
     width: 40px;
     height: 40px;
     border-radius: 50%;
     color: white;
     background-color: black;
     font-family: "Courier New", monospace;
-    font-size: clamp(0.8rem, 0.5vw + 0.7rem, 1rem); /* added */
+    font-size: clamp(0.8rem, 0.5vw + 0.7rem, 1rem);
     text-decoration: none;
-    transition: width 0.5s ease-in-out,
-                border-radius 0.5s ease-in-out;
+    overflow: hidden;
+    transition: width 0.7s ease-in-out 0.15s,
+                border-radius 0.7s ease-in-out 0.15s,
+                padding-left 0.7s ease-in-out 0.15s;
 }
 #join-link:hover{
-    width: 320px;
+    width: calc(31ch + 32px);   /* 31 символ + запас на padding з обох боків */
     border-radius: 20px;
+    padding-left: 16px;
 }
 #join-link #extra{
     display: inline-block;
@@ -63,11 +68,12 @@ h1::after {
     width: 0;
     margin-left: 0;
     vertical-align: bottom;
-    transition: width 0.3s ease-in-out,
-                margin-left 0.3s ease-in-out;
+    transition: width 0.5s steps(28, end) 0.15s,
+            margin-left 0.2s ease-in-out 0.65s;
 }
 #join-link:hover #extra{
-    width: 280px;
+    width: 29ch;    /* ← точно під кількість символів, без зайвого хвоста */
+    margin-left: 6px;
     transition: width 0.7s steps(28, end) 0.15s,
                 margin-left 0.2s ease-in-out 0.15s;
 }
@@ -210,4 +216,35 @@ form{
 }
 #made_by{
     font-size: clamp(0.75rem, 0.3vw + 0.7rem, 0.9375rem); /* was fixed 15px */
+}
+
+@media (max-width: 768px) {
+    #gallery_ad{
+        flex-direction: column;
+        align-items: stretch;   /* ← додати, перекриває flex-start */
+        height: auto;
+    }
+    #gallery{
+        display: block;        /* ← замість grid, простіше на мобільному */
+        height: auto;
+    }
+    .gallery-img{
+        width: 100%;
+        height: auto;           /* ← замість 100% */
+        aspect-ratio: 1 / 1;    /* ← задає пропорцію напряму, без залежності від батька */
+        object-fit: cover;
+    }
+    .gallery-img:hover{
+        transform: none;
+        border-radius: 30px;   /* лишити як у звичайному стані */
+    }
+    #ad{
+        writing-mode: horizontal-tb;
+        height: auto;
+        padding: 20px;
+    }
+    #main_content{
+        grid-template-columns: 1fr;
+        height: auto;
+    }
 }
