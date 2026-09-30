@@ -101,6 +101,8 @@ h1::after {
     object-fit: cover;
     border-radius: 30px;
     border: 4px solid #b5abaa;
+    transition: transform 0.3s ease-in-out,
+                border-radius 0.3s ease-in-out;
 }
 .gallery-img:hover{
     transform: scale(2);
@@ -108,10 +110,10 @@ h1::after {
     transition: transform 0.3s ease-in-out,
                 border-radius 0.3s ease-in-out;
 }
-#tl-img:hover{ transform-origin: left top; }
-#tr-img:hover{ transform-origin: right top; }
-#bl-img:hover{ transform-origin: left bottom; }
-#br-img:hover{ transform-origin: right bottom; }
+#tl-img{ transform-origin: left top; }
+#tr-img{ transform-origin: right top; }
+#bl-img{ transform-origin: left bottom; }
+#br-img{ transform-origin: right bottom; }
 
 #ad{
     flex: 2;
@@ -133,7 +135,7 @@ h1::after {
 }
 
 
-    
+
 /* Content */
 #main_content{
     height: 30vh;
