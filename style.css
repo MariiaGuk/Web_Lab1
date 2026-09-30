@@ -4,7 +4,7 @@
 }
 body{
     font-family: Impact, "Arial Black", sans-serif;
-    font-size: clamp(1rem, 0.4vw + 0.9rem, 1.125rem); /* base size now scales */
+    font-size: clamp(1rem, 0.4vw + 0.9rem, 1.125rem);
     color: white;
     background-color: #e6e2e2;
     text-shadow: -1.5px 1.5px #4c4140;
@@ -23,7 +23,7 @@ h1{
     color: white;
     font-family: Impact, "Arial Black", sans-serif;
     font-weight: bold;
-    font-size: clamp(1.75rem, 4vw + 1rem, 3.5rem); /* added: h1 had no explicit size before */
+    font-size: clamp(1.75rem, 4vw + 1rem, 3.5rem);
     text-shadow:
     2px 2px 0 red,
     -2px -2px 0 cyan;
@@ -36,7 +36,6 @@ h1::after {
   content: "_Kitty!";
 }
 #join-link{
-    white-space: nowrap;
     position: fixed;
     z-index: 1000;
     top: 10px;
@@ -45,9 +44,9 @@ h1::after {
     align-items: center;
     justify-content: flex-start;
     text-align: left;
-    width: 2.25em;                    /* було 40px: тепер 29-36px залежно від шрифту */
+    width: 2.25em; /* is calculated based on the font size of the current element */
     height: 2.25em;
-    padding-left: 0.5em;              /* було 10px, "AI" залишається по центру кола */
+    padding: 0.5em;
     max-width: calc(100vw - 20px);
     border-radius: 50%;
     color: white;
@@ -57,38 +56,30 @@ h1::after {
     text-decoration: none;
     overflow: hidden;
     transition: width 0.7s ease-in-out 0.15s,
-                border-radius 0.7s ease-in-out 0.15s,
-                padding-left 0.7s ease-in-out 0.15s;
+                border-radius 0.7s ease-in-out 0.15s;
 }
 #join-link:hover{
-    width: calc(31ch + 32px);   /* 31 символ + запас на padding з обох боків */
+    width: calc(33ch);
     border-radius: 20px;
-    padding-left: 16px;
 }
 #join-link #extra{
-    display: inline-block;
     overflow: hidden;
     white-space: nowrap;
     width: 0;
-    margin-left: 0;
-    vertical-align: bottom;
-    transition: width 0.5s steps(28, end) 0.15s,
-            margin-left 0.2s ease-in-out 0.65s;
+    transition: width 0.5s steps(28, end) 0.15s;
 }
 #join-link:hover #extra{
-    width: 29ch;    /* ← точно під кількість символів, без зайвого хвоста */
-    margin-left: 6px;
-    transition: width 0.7s steps(28, end) 0.15s,
-                margin-left 0.2s ease-in-out 0.15s;
+    width: 29ch; /* exact quantity of characters */
+    transition: width 0.7s steps(28, end) 0.15s;
 }
+
 
 
 /* Gallery_ad */
 #gallery_ad{
     display: flex;
     align-items: flex-start;
-    margin: 12px 0px;
-    height: 95vh;
+    height: 95vh; /*vh - viewport height*/
 }
 #gallery{
     position: relative;
@@ -117,18 +108,11 @@ h1::after {
     transition: transform 0.3s ease-in-out,
                 border-radius 0.3s ease-in-out;
 }
-#tl-img:hover{
-    transform-origin: left top;
-}
-#tr-img:hover{
-    transform-origin: right top;
-}
-#bl-img:hover{
-    transform-origin: left bottom;
-}
-#br-img:hover{
-    transform-origin: right bottom;
-}
+#tl-img:hover{ transform-origin: left top; }
+#tr-img:hover{ transform-origin: right top; }
+#bl-img:hover{ transform-origin: left bottom; }
+#br-img:hover{ transform-origin: right bottom; }
+
 #ad{
     flex: 2;
     height: 100%;
@@ -142,21 +126,20 @@ h1::after {
     overflow: hidden;
 }
 #ad > p{
-    font-size: clamp(0.8rem, 5vh, 3.5rem); /* already fluid — left as-is */
+    font-size: clamp(0.8rem, 5vh, 3.5rem);
     text-align: center;
     padding: 35px;
     overflow-wrap: anywhere;
 }
 
 
-
+    
 /* Content */
 #main_content{
-    width: 100%;
     height: 30vh;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
+    grid-template-columns: repeat(3, 1fr); /*fr - fractional unit (1 part of the available space)*/
+    gap: 12px;
     margin: 12px 0px;
 }
 .column{
@@ -166,7 +149,7 @@ h1::after {
     overflow-y: scroll;
     text-align: justify;
     font-family: Cambria, Georgia, serif;
-    font-size: clamp(0.9rem, 0.3vw + 0.85rem, 1.05rem); /* added */
+    font-size: clamp(0.9rem, 0.3vw + 0.85rem, 1.05rem);
     color:#4c4140;
     text-shadow: 1px 1px 0px white
 }
@@ -178,7 +161,6 @@ h1::after {
 
 /* Footer */
 footer{
-    padding: 0px 0px 1px 0px;
     background-color: #b5abaa;
     text-align: center;
     border-radius: 30px;
@@ -190,7 +172,7 @@ h2{
 }
 #info{
     display: flex;
-    flex-wrap: wrap;           /* пункти переходять на новий рядок цілими */
+    flex-wrap: wrap; /* The items move to a new line as whole units. */
     list-style-type: none;
     justify-content: center;
     padding: 0;
@@ -216,7 +198,7 @@ form{
 }
 #email{
     width: 100%;
-    max-width: 22rem;       /* на широких екранах не розтягується безмежно */
+    max-width: 22rem;
 }
 #subscribe{
     font-size: clamp(0.9rem, 0.5vw + 0.8rem, 1.25rem);
@@ -229,15 +211,16 @@ form{
     font-size: clamp(0.75rem, 0.3vw + 0.7rem, 0.9375rem);
 }
 
+
+
+/* Responsiveness */
 @media (max-width: 768px) {
     #gallery_ad{
         flex-direction: column;
-        align-items: stretch;   /* ← додати, перекриває flex-start */
         height: auto;
     }
     #gallery{
         grid-template-columns: 1fr;
-        grid-template-rows: none;
         height: auto;
     }
     .gallery-img:hover{
@@ -248,7 +231,7 @@ form{
         writing-mode: horizontal-tb;
     }
     #ad > p{
-        font-size: clamp(0.8rem, 6vw, 2.5rem);   /* на мобільному текст горизонтальний, тож рахуємо від ширини */
+        font-size: clamp(0.8rem, 6vw, 2.5rem);
         padding: 20px;
     }
     #main_content{
