@@ -78,14 +78,12 @@ h1::after {
 /* Gallery_ad */
 #gallery_ad{
     display: flex;
-    align-items: flex-start;
-    height: 95vh; /*vh - viewport height*/
+    height: clamp(500px, 95vh, 1200px); /*vh - viewport height*/
 }
 #gallery{
     position: relative;
     flex: 8;
     display: grid;
-    height: 95vh;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, 1fr);
 }
