@@ -1,5 +1,5 @@
 * {
-    box-sizing: border-box;
+    box-sizing: border-box; /* includes padding and border in the element's total width and height */
     scroll-behavior: smooth;
 }
 body{
@@ -40,14 +40,12 @@ h1::after {
     z-index: 1000;
     top: 10px;
     right: 10px;
-    display: flex;
+    display: flex; /* Flexbox: a way to arrange child elements in a row or column and control their alignment and sizing. */
     align-items: center;
-    justify-content: flex-start;
-    text-align: left;
     width: 2.25em; /* is calculated based on the font size of the current element */
     height: 2.25em;
     padding: 0.5em;
-    max-width: calc(100vw - 20px);
+    max-width: calc(100vw);
     border-radius: 50%;
     color: white;
     background-color: black;
@@ -66,11 +64,11 @@ h1::after {
     overflow: hidden;
     white-space: nowrap;
     width: 0;
-    transition: width 0.5s steps(28, end) 0.15s;
+    transition: width 0.5s steps(28) 0.15s;
 }
 #join-link:hover #extra{
     width: 29ch; /* exact quantity of characters */
-    transition: width 0.7s steps(28, end) 0.15s;
+    transition: width 0.7s steps(28) 0.15s;
 }
 
 
@@ -81,14 +79,13 @@ h1::after {
     height: clamp(500px, 95vh, 1200px); /*vh - viewport height*/
 }
 #gallery{
-    position: relative;
     flex: 8;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, 1fr);
 }
 #gallery > div {
-    min-height: 0;
+    min-height: 0; /* grid/flex items default to min-height: auto, so they can't shrink below their content*/
     min-width: 0;
 }
 .gallery-img{
@@ -96,7 +93,7 @@ h1::after {
     background-color: #e6e2e2;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: cover; /* covers the entire container, keeping its aspect ratio, but may be cropped if necessary */
     border-radius: 30px;
     border: 4px solid #b5abaa;
     transition: transform 0.3s ease-in-out,
@@ -106,10 +103,10 @@ h1::after {
     transform: scale(2);
     border-radius: 0px;
 }
-#tl-img{ transform-origin: left top; }
-#tr-img{ transform-origin: right top; }
-#bl-img{ transform-origin: left bottom; }
-#br-img{ transform-origin: right bottom; }
+.tl-img{ transform-origin: left top; }
+.tr-img{ transform-origin: right top; }
+.bl-img{ transform-origin: left bottom; }
+.br-img{ transform-origin: right bottom; }
 
 #ad{
     flex: 2;
@@ -122,12 +119,43 @@ h1::after {
     border-radius: 30px;
     box-shadow : clamp(0.8rem, 5vh, 3.5rem) clamp(0.8rem, 5vh, 3.5rem) clamp(0.8rem, 5vh, 3.5rem) #4c4140ad inset;
     overflow: hidden;
+    perspective: 1500px; /* higher = more subtle/distant flip; lower = more dramatic */
 }
-#ad > p{
+.ad-inner{
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s ease-in-out;
+    transform-style: preserve-3d;
+    position: relative;
+}
+
+#ad:hover .ad-inner{
+    transform: rotateY(180deg);
+}
+
+.ad-face{
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backface-visibility: hidden; /* hides the face when it's turned away from viewer */
+    border-radius: 30px;
+    background-color: #b5abaa;
+    box-shadow: clamp(0.8rem, 5vh, 3.5rem) clamp(0.8rem, 5vh, 3.5rem) clamp(0.8rem, 5vh, 3.5rem) #4c4140ad inset;
+    overflow: hidden;
+}
+.ad-back{
+    transform: rotateY(180deg); /* pre-rotated so it faces "backward" until the parent flips */
+    background-color: #4c4140;
+    box-shadow: clamp(0.8rem, 5vh, 3.5rem) clamp(0.8rem, 5vh, 3.5rem) clamp(0.8rem, 5vh, 3.5rem) #b5abaa53 inset;
+    text-shadow: -1.5px 1.5px #b5abaa;
+}
+
+.ad-face > p{
     font-size: clamp(0.8rem, 5vh, 3.5rem);
     text-align: center;
     padding: 35px;
-    overflow-wrap: anywhere;
 }
 
 
@@ -166,6 +194,7 @@ footer{
     background-color: #b5abaa;
     text-align: center;
     border-radius: 30px;
+    padding: 10px;
     overflow: hidden;
 }
 h2{
@@ -196,14 +225,24 @@ form{
     align-items: center;
     gap: 10px;
 }
-#stay_connected{
-    font-size: clamp(0.9rem, 0.5vw + 0.8rem, 1.25rem);
+#contact_label{
+    display: inline-block;
+    background-color: #4c4140;
+    padding: 10px;
+    border-radius: 20px;
+    font-size: clamp(1rem, 1vw + 0.55rem, 1.5625rem);
+    margin: 10px;
 }
 #email{
     width: 100%;
-    max-width: 22rem;
+    max-width: 25rem;
 }
-#subscribe{
+#message{
+    width: 100%;
+    max-width: 30rem;
+    height: 10rem;
+}
+#submit{
     font-size: clamp(0.9rem, 0.5vw + 0.8rem, 1.25rem);
     font-family: 'Courier New', monospace;
     font-weight: bold;
@@ -211,13 +250,28 @@ form{
     cursor: pointer;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
-#subscribe:hover{
+#submit:hover{
     transform: translateY(-3px);
     box-shadow: 0 6px 0 #4c4140;
 }
-#subscribe:active{
+#submit:active{
     transform: translateY(0);
     box-shadow: 0 1px 0 #4c4140;
+}
+#submit:disabled {
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+#sent{
+    display: none;
+    font-size: clamp(1rem, 0.5vw + 1rem, 1.25rem);
+    animation: sent-pop 0.5s ease-in-out forwards,
+               sent-pop 0.5s ease-in-out reverse 3.5s forwards;
+}
+@keyframes sent-pop {
+    from { opacity: 0; transform: translateY(-10px) scale(0.9); }
+    to   { opacity: 1; transform: none; }
 }
 #made_by{
     font-size: clamp(0.75rem, 0.3vw + 0.7rem, 0.9375rem);
@@ -233,16 +287,19 @@ form{
     }
     #gallery{
         grid-template-columns: 1fr;
+        grid-template-rows: none;
         height: auto;
     }
     .gallery-img:hover{
         transform: none;
         border-radius: 30px;
     }
-    #ad{
+    #ad {
         writing-mode: horizontal-tb;
+        height: clamp(120px, 30vw, 200px);
+        flex: none;
     }
-    #ad > p{
+    .ad-face > p{
         font-size: clamp(0.8rem, 6vw, 2.5rem);
         padding: 20px;
     }
@@ -315,13 +372,6 @@ h1{
 #join-link:hover{
     animation: none;
 }
- 
-/* Ad breathing */
-@keyframes ad-breathe {
-    50% {
-        box-shadow: clamp(1.2rem, 7vh, 4.5rem) clamp(1.2rem, 7vh, 4.5rem) clamp(1.2rem, 7vh, 4.5rem) #4c4140ad inset;
-    }
-}
-#ad{
-    animation: ad-breathe 4s ease-in-out infinite;
+#contact_label{
+    animation: join-pulse 2s ease-in-out infinite;
 }

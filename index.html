@@ -6,6 +6,25 @@
     <title>Anfisa</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/png" href="images/icon.png">
+
+    <script>
+        function showSent() {
+            document.querySelector("form").reset();
+
+            const sent = document.getElementById("sent");
+            const button = document.getElementById("submit");
+
+            sent.style.display = "block";
+            button.disabled = true;
+
+            sent.scrollIntoView({ block: "center" });
+
+            setTimeout(() => {
+                sent.style.display = "none";
+                button.disabled = false;
+            }, 4000);
+        }
+    </script>
 </head>
 <body>
     <header id="head">
@@ -18,21 +37,28 @@
         <div id="gallery_ad">
             <section id="gallery">
                 <div>
-                    <img title="Epic kitty" class="gallery-img" id="tl-img" src="images/grid_1.png" alt="Kitty 1">
+                    <img title="Epic kitty" class="gallery-img tl-img" src="images/grid_1.png" alt="Kitty 1">
                 </div>
                 <div>
-                    <img title="Cute kitty" class="gallery-img" id="tr-img" src="images/grid_2.png" alt="Kitty 2">
+                    <img title="Cute kitty" class="gallery-img tr-img" src="images/grid_2.png" alt="Kitty 2">
                 </div>
                 <div>
-                    <img title="DJ-kitty" class="gallery-img" id="bl-img" src="images/grid_3.png" alt="Kitty 3">
+                    <img title="DJ-kitty" class="gallery-img bl-img" src="images/grid_3.png" alt="Kitty 3">
                 </div>
                 <div>
-                    <img title="Relaxed kitty" class="gallery-img" id="br-img" src="images/grid_4.png" alt="Kitty 4">
+                    <img title="Relaxed kitty" class="gallery-img br-img" src="images/grid_4.png" alt="Kitty 4">
                 </div>
             </section>
 
             <aside id="ad">
-                <p>PLACE FOR YOUR ADVERMEOWSEMENT HERE</p>
+                <div class="ad-inner">
+                    <div class="ad-face ad-front">
+                        <p>PLACE YOUR ADVERMEOWSEMENT HERE</p>
+                    </div>
+                    <div class="ad-face ad-back">
+                        <p>INTERESTED? EMAIL US!</p>
+                    </div>
+                </div>
             </aside>
         </div>
         
@@ -66,11 +92,14 @@
             </ul>
         </nav>
 
-        <form action="coming_soon.html" method="get">
-            <label id="stay_connected" for="email">STAY CONNECTED</label>
+        <!-- <form action="coming_soon.html" method="get"> -->
+        <form onsubmit="showSent(); return false;"> <!-- the form is not being sent to the server -->
+            <label id="contact_label" for="email">INTERESTED IN ADVERTISING HERE? DROP US A LINE</label>
             <input type="email" id="email" name="email" placeholder="Your email" required>
-            <button type="submit" id="subscribe">SUBSCRIBE</button>
+            <textarea id="message" name="message" placeholder="Your message" maxlength="1000" required></textarea>
+            <button type="submit" id="submit">CONTACT US</button>
         </form>
+        <p id="sent">SUCCESSFULLY SENT!</p>
         <p id="made_by">Made by Mariia Guk 2026</p>
     </footer>
 </body>
